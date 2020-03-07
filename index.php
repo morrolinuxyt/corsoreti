@@ -27,39 +27,25 @@
     //UDEMY STATS
     ini_set("allow_url_fopen", 1);
 
-    $json = file_get_contents('https://www.udemy.com/api-2.0/courses/1705118?fields[course]=title,num_subscribers,num_lectures,num_reviews');
-    $lpic101 = json_decode($json);
+    $json = file_get_contents('https://www.udemy.com/api-2.0/courses/2712838?fields[course]=title,num_subscribers,num_lectures,num_reviews');
+    $networking101 = json_decode($json);
 
-    $json = file_get_contents('https://www.udemy.com/api-2.0/courses/1894304?fields[course]=title,num_subscribers,num_lectures,num_reviews');
-    $lpic102 = json_decode($json);
+    $subs = $networking101->num_subscribers;
 
-    $json = file_get_contents('https://www.udemy.com/api-2.0/courses/1912136?fields[course]=title,num_subscribers,num_lectures,num_reviews');
-    $essentials = json_decode($json);
+    $reviews = $networking101->num_reviews;
 
-    $subs = $lpic101->num_subscribers + $lpic102->num_subscribers + $essentials->num_subscribers;
-
-    $reviews = $lpic101->num_reviews + $lpic102->num_reviews + $essentials->num_reviews;
-
-    $lessons = $lpic101->num_lectures + $lpic102->num_lectures + $essentials->num_lectures;
+    $lessons = $networking101->num_lectures;
 
     //UDEMY COUPONS
-    $essentials = $e101 = $e102 = "";
+    $n101 = "";
 
     $json_data = file_get_contents('udemy_coupons.json');
     $data = json_decode($json_data, true);
 
-    $essentials = $data["Essentials"];
-    $e101 = $data["101"];
-    $e102 = $data["102"];
+    $n101 = $data["Networking 101"];
 
-    if(empty($essentials)){
-      $essentials = "https://www.udemy.com/course/impara-linux-da-zero-lpi-linux-essentials/?referralCode=9F2C500B1DC009224ABD";
-    }
-    if(empty($e101)){
-      $e101 = "https://www.udemy.com/course/impara-linux-dalle-basi-alla-certificazione/?referralCode=51B7A99838177C89C187";
-    }
-    if(empty($e102)){
-      $e102 = "https://www.udemy.com/course/impara-linux-dalle-basi-alla-certificazione-lpi-exam-102/?referralCode=7018A3D9DC7C34281A3F";
+    if(empty($n101)){
+      $n101 = "https://www.udemy.com/course/networking-101-corso-di-reti-da-zero/?referralCode=B2B920B2090248291B6B";
     }
 
   ?>
@@ -67,7 +53,7 @@
   <!-- Navigation -->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
     <div class="container">
-      <a class="navbar-brand js-scroll-trigger font-weight-light" href="#page-top"><b>CorsoLinux</b>.com</a>
+      <a class="navbar-brand js-scroll-trigger font-weight-light" href="#page-top"><b>CorsoReti</b>.it</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -96,8 +82,8 @@
     <div class="container h-100">
       <div class="row h-100 align-items-center">
         <div class="col-12 text-center text-white">
-          <h1 class="font-weight-light">Il corso bestseller italiano su Linux</h1>
-          <p class="lead">inizia la tua carriera come professionista in un settore in rapida crescita!</p>
+          <h1 class="font-weight-light">Il corso bestseller italiano sul Networking</h1>
+          <p class="lead">impara i fondamenti della tecnologia che ha rivoluzionato il nostro modo di comunicare</p>
           <a class="btn btn-lg btn-outline-light js-scroll-trigger" href="#courses">Scopri</a>
         </div>
       </div>
@@ -106,14 +92,15 @@
 
   <section id="why">
     <div class="container text-center">
-      <h2 class="my-5">PERCHÈ IMPARARE LINUX?</h2>
+      <h2 class="my-5">PERCHÈ STUDIARE NETWORKING?</h2>
       <p class="my-5 text-justify">
-        Grazie alla sua grande versatilità e snellezza, GNU/Linux può funzionare su qualunque genere di dispositivo, dal <i>server</i> in un <i>datacenter</i>, al mini router di casa nostra.
-        Non è quindi un caso che Linux sia oggi lo <b>standard "de facto"</b> su innumerevoli dispositivi per le più disparate applicazioni: dall'<i>automotive</i> (sistemi di <i>infotainment</i>) all'<b>IoT</b> e alla <b>domotica</b>, passando per le nostre tasche (Android) e perfino nei nostri <b>elettrodomestici</b> (televisori, frigoriferi, e molto altro) senza tralasciare il suo <b>importante ruolo nei sistemi <i>real-time</i></b> come la guida autonoma ed i nuovi sistemi di controllo industriali, rendendo la sua conoscenza <b>un requisito per una vastissima varietà di ambiti</b> tecnologici e posizioni lavorative.<br>
-        Linux è anche molto in voga fra gli hobbisti/makers grazie alla popolarità di piattaforme di sviluppo <i>embedded</i> come <b>Raspberry Pi</b>, per la realizzazione di progetti "fai da te" spesso in accoppiata con Arduino.
+	Il mondo come lo conosciamo oggi è tale grazie ad Internet e all'invenzione del web, due tecnologie che hanno rivoluzionato il nostro modo di comunicare, lavorare e perfino fare la spesa. <br>
+	Ad oggi sono presenti nel mondo <b> oltre 22 miliardi di dispositivi connessi </b> alla rete, quasi 3 volte la popolazione mondiale! <br>
+	Realizzare e mantenere un'infrastruttura di tale portata richiede una coordinazione internazionale tra gli innumerevoli enti indipendenti presenti sul territorio (detti Autonomous Systems) incaricati della gestione di <b>enormi datacenter </b> e backbone transoceaniche per <b> oltre settecentomila kilometri di cavi </b> - fra terrestri e sottomarini - stesi sia con fondi pubblici che privati da importanti nomi come <b>Microsoft, Google, Facebook </b>e molti altri. <br>
+	Essere parte di questa realtà significa lavorare in un settore <b>stimolante</b>, ricco di sfide e <b>in continua evoluzione</b>.
       </p>
       <div class="yt_video">
-         <iframe src="https://www.youtube.com/embed/IpfcahnPknM" frameborder="0" allowfullscreen></iframe><br /><br />
+         <iframe src="https://www.youtube.com/embed/giF9F8s9hnU" frameborder="0" allowfullscreen></iframe><br /><br />
       </div>
     </div>
   </section>
@@ -122,7 +109,8 @@
     <div class="container text-center">
       <p class="mb-5">
         Pronto per entrare in classe?<br>
-        Unisciti agli oltre duemila studenti già iscritti al <b>corso bestseller italiano su Linux</b>, Costruisci solide basi e <b>inizia la tua carriera come professionista in un settore in rapida crescita!</b>
+        A pochi mesi dalla sua pubblicazione il corso è subito diventato un bestseller.<br>
+	Unisciti agli altri studenti e scoprirai perchè!
       </p>
       <div class="row">
         <div class="col-lg-4 stats">
@@ -148,54 +136,24 @@
   <section id="courses">
     <div class="container">
       <p class="mb-5 text-justify">
-        Tutti possono imparare Linux. Qualunque sia il tuo livello di partenza e il tuo obiettivo, troverai di seguito il corso che fa per te.<br>
-        Qui imparerai tutto ciò che c'è da sapere su Linux ed il suo ecosistema, tramite spiegazioni ed <b>esempi concreti</b> di utilizzo. Al termine, se vorrai, potrai anche affrontare gli <b>esami ufficiali LPI</b> e conseguire una <b>certificazione professionale riconosciuta internazionalmente</b>.<br>
-        Preoccupato per l'esame?<br>
-        Nei miei corsi troverai tutte le risorse necessarie a coprire ogni argomento del programma, dandoti la giusta preparazione a superarlo.
+	Il mondo delle <b>Reti di calcolatori </b>ti affascina? 
+O forse stai solo studiando per un <b>compito di sistemi</b>? Che tu sia un <b>appassionato</b>, uno <b>studente delle superiori</b> o un <b>universitario</b> alle prime armi con <i>Protocolli e Architetture di Rete</i>, sei nel posto giusto! <br>
+	Ho pensato questo corso di Reti per guidarti in una <b>panoramica sul mondo del Networking</b> ed i suoi protocolli senza tralasciare, ove necessario, importanti <b>cenni sulla sicurezza informatica</b> troppo spesso "ignorati" nei corsi base di Networking.<br>
+	Ad esempio: come funziona la rete <i> TOR? </i>è veramente in grado di garantirci il <b>totale anonimato</b> sulla rete? o ancora: come funziona il <b>furto d'identità</b> (<i>spoofing</i>) nel sistema email e perchè non è possibile prevenirlo completamente? <br>
+	Per rispondere a questa domanda è necessario <b>capire come funziona</b> il sistema email e quali sono le sue debolezze.  <br>
+	Nello svolgimento del corso, vedremo in dettaglio questo ed altri esempi di vitale importanza per un consapevole uso della rete.
       </p>
       <div class="card-deck">
-        <a class="invisible-link" href="<?php echo $essentials; ?>">
+        <a class="invisible-link" href="<?php echo $n101; ?>">
           <div class="card">
-            <img src="assets/corso-lpi-linux-essentials-cover.jpg" class="card-img-top" alt="Copertina corso LPI Linux Essentials" title="Corso per certificazione LPI Linux Essentials online in italiano">
+            <img src="assets/corso-networking-101-cover.jpg" class="card-img-top" alt="Copertina corso Networking 101" title="Corso di Reti online in italiano">
             <div class="card-body d-flex flex-column">
-              <h3 class="card-title">Linux Essentials</h3>
+              <h3 class="card-title">Networking 101</h3>
               <p class="card-text">
-                Il corso LPI Linux Essentials parte "da zero" e introduce a GNU/Linux e al mondo dell'Open Source.<br><br>
-                Si rivolge ad un pubblico di utenti alle prime armi con Linux, ma anche a chi ha qualche lacuna da appianare.<br><br>
-                Il programma completo del corso è diviso in 5 sezioni, e spazia su tutti gli aspetti generali di una distribuzione Linux.
+		Percorreremo tutti i livelli dello stack TCP/IP soffermandoci sul funzionamento in dettaglio di tecnologie e protocolli di particolare attualità o rilevanza. 
+Oltre a fornire una visione d'insieme non mancherà - dove opportuno - un'analisi critica di debolezze e vulnerabilità dei protocolli in esame. <br><br>
               </p>
-              <a title="Corso LPI Linux Essentials" href="<?php echo $essentials; ?>" class="btn btn-primary mt-auto">Vai al corso</a>
-            </div>
-          </div>
-        </a>
-        <a class="invisible-link" href="<?php echo $e101; ?>">
-          <div class="card">
-            <img src="assets/corso-lpic-1-exam-101-cover.jpg" class="card-img-top" alt="Copertina corso LPIC-1 Exam 101" title="Corso per certificazione LPIC-1 esame 101">
-            <div class="card-body d-flex flex-column">
-              <h3 class="card-title">LPIC-1 | Exam 101</h3>
-              <p class="card-text">
-            		LPIC-1 è il corso di certificazione professionale LPI di primo livello.<br><br>
-            		Partendo dalle conoscenze di base, arriverai a conoscere Linux in ogni suo aspetto,
-            		dalla diagnostica dei problemi più comuni all'amministrazione di Server e PC Desktop.<br><br>
-            		Questo corso parte dalle basi, ma si rivolge ad una utenza leggermente più consapevole.
-  	          </p>
-              <a title="Corso LPIC-1 | Exam 101" href="<?php echo $e101; ?>" class="btn btn-primary mt-auto">Vai al corso</a>
-            </div>
-          </div>
-        </a>
-        <a class="invisible-link" href="<?php echo $e102; ?>">
-          <div class="card">
-            <img src="assets/corso-lpic-1-exam-102-cover.jpg" class="card-img-top" alt="Copertina corso LPIC-1 Exam 102" title="Corso per certificazione LPIC-1 esame 102">
-            <div class="card-body d-flex flex-column">
-              <h3 class="card-title">LPIC-1 | Exam 102</h3>
-              <p class="card-text">
-            		Seconda parte del programma di certificazione LPI di primo livello. <br><br>
-            		Questo modulo ti dà la preparazione necessaria a passare il secondo e ultimo
-            		esame per la certificazione professionale di primo livello<br>(Exam 102)<br><br>
-            		Al superamento degli esami 101 e 102 presso un centro autorizzato Pearson VUE,
-            		otterai la certificazione professionale in ambito Linux
-  	          </p>
-              <a title="Corso LPIC-1 | Exam 102" href="<?php echo $e102; ?>" class="btn btn-primary mt-auto">Vai al corso</a>
+              <a title="Corso Networking 101" href="<?php echo $n101; ?>" class="btn btn-primary mt-auto">Vai al corso</a>
             </div>
           </div>
         </a>
@@ -242,62 +200,6 @@
                         </div>
                     </div>
                 </div>
-                <div class="card">
-                    <div class="card-header" id="accordion-tab-1-heading-3">
-                        <h5>
-                            <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#accordion-tab-1-content-3" aria-expanded="false" aria-controls="accordion-tab-1-content-3">
-                              Ho seguito il corso, come posso ottenere la certificazione?
-                            </button>
-                        </h5>
-                    </div>
-                    <div class="collapse" id="accordion-tab-1-content-3" aria-labelledby="accordion-tab-1-heading-3" data-parent="#accordion-tab-1">
-                        <div class="card-body">
-                            <p>
-                              Per ottenere la certificazione LPI relativa al corso frequentato ("Linux Essentials" o "LPIC-1") devi sostenere l'esame in un centro esami autorizzato Pearson VUE. Ce ne sono in ogni città, per trovare il centro più vicino a casa tua visita <a href="http://www.pearsonvue.com/servlet/vue.web2.core.Dispatcher?webContext=CandidateSite&webApp=TestCenterLocator&requestedAction=register&cid=374"> questo link</a>.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="card-header" id="accordion-tab-1-heading-4">
-                        <h5>
-                            <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#accordion-tab-1-content-4" aria-expanded="false" aria-controls="accordion-tab-1-content-4">
-                              Come si svolge l'esame di certificazione?
-                            </button>
-                        </h5>
-                    </div>
-                    <div class="collapse" id="accordion-tab-1-content-4" aria-labelledby="accordion-tab-1-heading-4" data-parent="#accordion-tab-1">
-                        <div class="card-body">
-                            <p>
-                              L'esame "Linux Essentials" è composto di 40 domande da rispondere in 60 minuti, mentre tutti gli esami LPIC sono 60 domande in 90 minuti.
-                              <br>Tutti gli esami consistono in domande aperte (es: "con quale comando creo un nuovo file vuoto?") e a scelta multipla.
-                              <br>Per maggiori informazioni su esami e certificazioni LPI visita le FAQ sul sito ufficiale lpi.org: <a href="https://www.lpi.org/it/about-lpi/frequently-asked-questions">https://www.lpi.org/it/about-lpi/frequently-asked-questions</a>
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="card-header" id="accordion-tab-1-heading-5">
-                        <h5>
-                            <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#accordion-tab-1-content-5" aria-expanded="false" aria-controls="accordion-tab-1-content-5">
-                              A quando risale l'ultimo aggiornamento? Il corso diventerà obsoleto?
-                            </button>
-                        </h5>
-                    </div>
-                    <div class="collapse" id="accordion-tab-1-content-5" aria-labelledby="accordion-tab-1-heading-5" data-parent="#accordion-tab-1">
-                        <div class="card-body">
-                            <p>
-                              Il programma LPI si aggiorna ogni 5 anni. Ad ogni aggiornamento vengono aggiunti nuovi video integrativi per mantenere il corso aggiornato.
-                              <br>Ad esempio a inizio 2019 c'è stato un aggiornamento degli obiettivi d'esame per "LPIC-1" dalla versione "4" alla versione "5", ed il corso è stato aggiornato per coprire le nuove competenze. Il prossimo aggiornamento cadrà entro il 2024.
-                              <br><br>Per maggiori dettagli su programma del corso e obiettivi d'esame visita:
-                              <br>LPIC-1: Exam 101: <a href="https://www.lpi.org/our-certifications/exam-101-objectives">https://www.lpi.org/our-certifications/exam-101-objectives</a>
-                              <br>Exam 102: <a href="https://www.lpi.org/our-certifications/exam-102-objectives">https://www.lpi.org/our-certifications/exam-102-objectives</a>
-                              <br>Linux Essentials: <a href="https://www.lpi.org/our-certifications/exam-010-objectives">https://www.lpi.org/our-certifications/exam-010-objectives</a>
-                            </p>
-                        </div>
-                    </div>
-                </div>
-
             </div>
         </div>
       </div>
@@ -314,11 +216,42 @@
           <div class="carousel-item active">
             <p class="review-body">
               <i class="fa fa-quote-left" aria-hidden="true"></i>
-              Il Corso è molto ben organizzato, e copre tutti gli argomenti essenziali per apprendere le basi di Linux. Le spiegazioni sono chiare, e permettono di comprendere anche i concetti più complessi. Per esempio, ho finalmente compreso
-              meglio il funzionamento dei file log e dei permessi. Sicuramente continuerò con i corsi successivi!
+		Eccezionale ! Complimenti per essere riuscito a riassumure un quantitativo di infromazioni, relativo ad un tema così complesso, in soli 4,5 ore. Molto utile per coloro che hanno già visto qualcosa in merito ma hanno idee confuse.
               <i class="fa fa-quote-right" aria-hidden="true"></i>
             </p>
-            <p class="review-name">Raffaele, studente "Linux Essentials"</p>
+            <p class="review-name">Leonid, studente "Networking 101"</p>
+            <div class="stars">
+              <i class="fa fa-star fa-lg" aria-hidden="true"></i>
+              <i class="fa fa-star fa-lg" aria-hidden="true"></i>
+              <i class="fa fa-star fa-lg" aria-hidden="true"></i>
+              <i class="fa fa-star fa-lg" aria-hidden="true"></i>
+              <i class="fa fa-star fa-lg" aria-hidden="true"></i>
+            </div>
+          </div>
+
+          <div class="carousel-item">
+            <p class="review-body">
+              <i class="fa fa-quote-left" aria-hidden="true"></i>
+		Seguivo Morrolinux su youtube da quando ho cominciato a lavorae nella cyber security ed ho preso questo corso proprio perche ' conoscevo le sue doti espilcative e non mi ha deluso.Perfetto per chi vuole capire bene il network
+              <i class="fa fa-quote-right" aria-hidden="true"></i>
+            </p>
+            <p class="review-name">Manuel, studente "Networking 101"</p>
+            <div class="stars">
+              <i class="fa fa-star fa-lg" aria-hidden="true"></i>
+              <i class="fa fa-star fa-lg" aria-hidden="true"></i>
+              <i class="fa fa-star fa-lg" aria-hidden="true"></i>
+              <i class="fa fa-star fa-lg" aria-hidden="true"></i>
+              <i class="fa fa-star fa-lg" aria-hidden="true"></i>
+            </div>
+          </div>
+
+          <div class="carousel-item">
+            <p class="review-body">
+              <i class="fa fa-quote-left" aria-hidden="true"></i>
+		Corso che consiglio a quanti hanno bisogno di avere delle conoscienze basilari sulle reti. L'istruttore è veramente bravo e riesce a spiegare in modo semplice concetti anche complessi (come ad esempio il subnetting ed il supernetting). Mi ritengo quindi soddisfatto.
+              <i class="fa fa-quote-right" aria-hidden="true"></i>
+            </p>
+            <p class="review-name">Pasquale, studente "Networking 101"</p>
             <div class="stars">
               <i class="fa fa-star fa-lg" aria-hidden="true"></i>
               <i class="fa fa-star fa-lg" aria-hidden="true"></i>
@@ -331,10 +264,10 @@
           <div class="carousel-item">
             <p class="review-body">
               <i class="fa fa-quote-left" aria-hidden="true"></i>
-              Ottima esposizione, fluida e senza pause. Preciso e completo nella spiegazione degli argomenti, che forniscono una ottima e solida base di conoscenza del mondo Linux.
+		Ho preso il corso a occhi chiusi conoscendo già l’autore dal suo canale YouTube. Comunque finora corso molto utile e spiegato bene. Lo affianco a lezioni di un corso di sicurezza informatica.
               <i class="fa fa-quote-right" aria-hidden="true"></i>
             </p>
-            <p class="review-name">Daniele, studente "Linux Essentials"</p>
+            <p class="review-name">Jacopo, studente "Networking 101"</p>
             <div class="stars">
               <i class="fa fa-star fa-lg" aria-hidden="true"></i>
               <i class="fa fa-star fa-lg" aria-hidden="true"></i>
@@ -347,10 +280,10 @@
           <div class="carousel-item">
             <p class="review-body">
               <i class="fa fa-quote-left" aria-hidden="true"></i>
-              Il corso è di buon livello. Affronta i comandi base di Linux e gli esempi sono facilmente riproducibili.
+		Ottimo corso, avevo già acquistato e seguito i corsi Linux LPI di Moreno e avevo riscontrato delle lacune relativi agli argomenti riguardanti le reti. Questo corso è capitato a fagiolo, alcune cose le sapevo già ma per molte altre ho notato che avevo solo una conoscenza sommaria. Molto soddisfatto finora. Edit: terminato il corso mi sento di consigliarlo senza riserve. Ha il pregio di tenere alta l'attenzione dall'inizio alla fine e incuriosire nell'approfondire tanti aspetti trattati. A quando il prossimo corso di Morro?
               <i class="fa fa-quote-right" aria-hidden="true"></i>
             </p>
-            <p class="review-name">Emanuele, studente "Linux Essentials"</p>
+            <p class="review-name">David, studente "Networking 101"</p>
             <div class="stars">
               <i class="fa fa-star fa-lg" aria-hidden="true"></i>
               <i class="fa fa-star fa-lg" aria-hidden="true"></i>
@@ -363,43 +296,10 @@
           <div class="carousel-item">
             <p class="review-body">
               <i class="fa fa-quote-left" aria-hidden="true"></i>
-              Le spiegazioni sono ben fatte, fluide e ricche di esempi.
+		Molto buona la struttura del corso e la capacità espositiva dell'insegnante. Sicuramente seguirò altri suoi corsi.
               <i class="fa fa-quote-right" aria-hidden="true"></i>
             </p>
-            <p class="review-name">Nazzareno, studente "Linux Essentials"</p>
-            <div class="stars">
-              <i class="fa fa-star fa-lg" aria-hidden="true"></i>
-              <i class="fa fa-star fa-lg" aria-hidden="true"></i>
-              <i class="fa fa-star fa-lg" aria-hidden="true"></i>
-              <i class="fa fa-star fa-lg" aria-hidden="true"></i>
-              <i class="fa fa-star fa-lg" aria-hidden="true"></i>
-            </div>
-          </div>
-
-          <div class="carousel-item">
-            <p class="review-body">
-              <i class="fa fa-quote-left" aria-hidden="true"></i>
-              Ho trovato un sacco di cose che non sapevo e adesso ho tante idee per la testa che cercherò di realizzare. Grazie Moreno, è un corso davvero ben fatto.
-              <i class="fa fa-quote-right" aria-hidden="true"></i>
-            </p>
-            <p class="review-name">Dog, studente "LPIC 102"</p>
-            <div class="stars">
-              <i class="fa fa-star fa-lg" aria-hidden="true"></i>
-              <i class="fa fa-star fa-lg" aria-hidden="true"></i>
-              <i class="fa fa-star fa-lg" aria-hidden="true"></i>
-              <i class="fa fa-star fa-lg" aria-hidden="true"></i>
-              <i class="fa fa-star fa-lg" aria-hidden="true"></i>
-            </div>
-          </div>
-
-          <div class="carousel-item">
-            <p class="review-body">
-              <i class="fa fa-quote-left" aria-hidden="true"></i>
-              Morro è un ottimo insegnante, molto chiaro e preciso, da molti esempi e sa spiegare.<br>
-              Una piccola nota: sarebbe stato forse da 5 stelle invece di 4,5 se ci fossero stati anche dei compiti da fare per lezione, con output spiegato brevemente a fine lezione, ma in se il resto è perfetto!
-              <i class="fa fa-quote-right" aria-hidden="true"></i>
-            </p>
-            <p class="review-name">Andrea, studente "LPIC 101"</p>
+            <p class="review-name">Alan, studente "Networking 101"</p>
             <div class="stars">
               <i class="fa fa-star fa-lg" aria-hidden="true"></i>
               <i class="fa fa-star fa-lg" aria-hidden="true"></i>
@@ -412,13 +312,10 @@
           <div class="carousel-item">
             <p class="review-body">
               <i class="fa fa-quote-left" aria-hidden="true"></i>
-              Ho imparato molto dai due corsi LPI di Moreno e sono molto soddisfatto del livello a cui portano. Mi sono riguardato tutti i video più di una volta ed è ottimo averli sempre a disposizione per ripassare gli argomenti al volo. Non posso
-              che dargli 5 stelle per la modalità di esposizione e per gli argomenti trattati.
-              <br>Soddisfattissimo.
-              <br>Grazie
+		Molto chiaro, contenuto interessante per chi parte da zero come me
               <i class="fa fa-quote-right" aria-hidden="true"></i>
             </p>
-            <p class="review-name">Simone, studente "LPIC 101"</p>
+            <p class="review-name">Monica, studente "Networking 101"</p>
             <div class="stars">
               <i class="fa fa-star fa-lg" aria-hidden="true"></i>
               <i class="fa fa-star fa-lg" aria-hidden="true"></i>
@@ -431,16 +328,16 @@
           <div class="carousel-item">
             <p class="review-body">
               <i class="fa fa-quote-left" aria-hidden="true"></i>
-              Un ottimo corso, spiegato in maniera chiara e ricco di appunti per lo studio. Complimenti all'insegnante!
+		Sono uno studente universitario e sto usando questo corso come supporto per il corso di "Reti di calcolatori". Ovviamente ricopre solo una piccola parte del programma e non scende nei dettagli, ma è molto utile per cominciare con il piede giusto ed avere il quadro generale
               <i class="fa fa-quote-right" aria-hidden="true"></i>
             </p>
-            <p class="review-name">Giovanni, studente "LPIC 101"</p>
+            <p class="review-name">Mattia, studente "Networking 101"</p>
             <div class="stars">
               <i class="fa fa-star fa-lg" aria-hidden="true"></i>
               <i class="fa fa-star fa-lg" aria-hidden="true"></i>
               <i class="fa fa-star fa-lg" aria-hidden="true"></i>
               <i class="fa fa-star fa-lg" aria-hidden="true"></i>
-              <i class="fa fa-star-o fa-lg" aria-hidden="true"></i>
+              <i class="fa fa-star fa-lg" aria-hidden="true"></i>
             </div>
           </div>
 
