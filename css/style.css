@@ -170,6 +170,17 @@ section {
   padding-top: 0px;
 }
 
+#particles-js{
+  width: 100%;
+  height: 100%;
+  background-color: #5d564f;
+  background-image: url('../assets/night-sky.jpg');
+  background-size: cover;
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+  position: absolute;
+}
+
 /*FAQ courtesy of https://codepen.io/moso/pen/vKGxMx?editors=1100*/
 .faq-nav {
   flex-direction: column;

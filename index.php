@@ -77,8 +77,7 @@
   </nav>
 
   <header class="landing">
-    <div class="bg"></div>
-    <video src="assets/landing_video.mp4" autoplay loop muted></video>
+    <div id="particles-js"></div>
     <div class="container h-100">
       <div class="row h-100 align-items-center">
         <div class="col-12 text-center text-white">
@@ -136,7 +135,7 @@
   <section id="courses">
     <div class="container">
       <p class="mb-5 text-justify">
-	Il mondo delle <b>Reti di calcolatori </b>ti affascina? 
+	Il mondo delle <b>Reti di calcolatori </b>ti affascina?
 O forse stai solo studiando per un <b>compito di sistemi</b>? Che tu sia un <b>appassionato</b>, uno <b>studente delle superiori</b> o un <b>universitario</b> alle prime armi con <i>Protocolli e Architetture di Rete</i>, sei nel posto giusto! <br>
 	Ho pensato questo corso di Reti per guidarti in una <b>panoramica sul mondo del Networking</b> ed i suoi protocolli senza tralasciare, ove necessario, importanti <b>cenni sulla sicurezza informatica</b> troppo spesso "ignorati" nei corsi base di Networking.<br>
 	Ad esempio: come funziona la rete <i> TOR? </i>è veramente in grado di garantirci il <b>totale anonimato</b> sulla rete? o ancora: come funziona il <b>furto d'identità</b> (<i>spoofing</i>) nel sistema email e perchè non è possibile prevenirlo completamente? <br>
@@ -150,7 +149,7 @@ O forse stai solo studiando per un <b>compito di sistemi</b>? Che tu sia un <b>a
             <div class="card-body d-flex flex-column">
               <h3 class="card-title">Networking 101</h3>
               <p class="card-text">
-		Percorreremo tutti i livelli dello stack TCP/IP soffermandoci sul funzionamento in dettaglio di tecnologie e protocolli di particolare attualità o rilevanza. 
+		Percorreremo tutti i livelli dello stack TCP/IP soffermandoci sul funzionamento in dettaglio di tecnologie e protocolli di particolare attualità o rilevanza.
 Oltre a fornire una visione d'insieme non mancherà - dove opportuno - un'analisi critica di debolezze e vulnerabilità dei protocolli in esame. <br><br>
               </p>
               <a title="Corso Networking 101" href="<?php echo $n101; ?>" class="btn btn-primary mt-auto">Vai al corso</a>
@@ -404,7 +403,8 @@ Oltre a fornire una visione d'insieme non mancherà - dove opportuno - un'analis
 
   <!-- Plugin JavaScript -->
   <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
-  <script src="js/jquery.fitvids.js"></script>
+  <script src="vendor/fitvids/jquery.fitvids.js"></script>
+  <script src="vendor/particles/particles.min.js"></script>
 
   <!-- Custom JavaScript -->
   <script src="js/script.js"></script>
