@@ -15,9 +15,9 @@
   <!-- Chrome Mobile Top Bar Color-->
   <meta name="theme-color" content="#343a40" />
 
-  <meta name="description" content="Ottieni la certificazione Linux e inizia la tua carriera come professionista IT in un settore in rapida crescita grazie al corso bestseller italiano su Linux. Scopri la nostra selezione di corsi ideati su misura per te!">
+  <meta name="description" content="Studia i fondamenti del Networking: un settore in continua evoluzione - corso bestseller italiano. Scopri la nostra selezione di corsi ideati su misura per te!">
 
-  <title>Impara Linux: il corso bestseller in italiano | Corso Linux</title>
+  <title>Networking 101: il corso bestseller in italiano | Corso Reti</title>
 </head>
 
 <body id="page-top">
@@ -60,7 +60,7 @@
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="#courses">Corsi</a>
+            <a class="nav-link js-scroll-trigger" href="#courses">Corso</a>
           </li>
           <li class="nav-item">
             <a class="nav-link js-scroll-trigger" href="#faq">FAQ</a>
@@ -100,7 +100,7 @@
 	Essere parte di questa realtà significa lavorare in un settore <b>stimolante</b>, ricco di sfide e <b>in continua evoluzione</b>.
       </p>
       <div class="yt_video">
-         <iframe src="https://www.youtube.com/embed/giF9F8s9hnU" frameborder="0" allowfullscreen></iframe><br /><br />
+         <iframe src="https://www.youtube-nocookie.com/embed/giF9F8s9hnU" frameborder="0" allowfullscreen></iframe><br /><br />
       </div>
     </div>
   </section>
@@ -364,7 +364,7 @@ Oltre a fornire una visione d'insieme non mancherà - dove opportuno - un'analis
             <a href="https://twitter.com/morrolinux/" target="_blank"><i class="fa fa-twitter-square mx-2" aria-hidden="true" style="color:#00acee;"></i></a>
             <a href="https://telegram.me/morrolinux_feed" target="_blank"><i class="fa fa-comment mx-2" aria-hidden="true" style="color:#0088cc;"></i></a>
           </h2>
-          <img class="avatar float-left rounded-circle mr-4" src="assets/docente-corso-linux-moreno-razzoli.jpg" alt="avatar docente corso linux: Moreno Razzoli" title="Docente del corso Linux: Moreno Razzoli">
+          <img class="avatar float-left rounded-circle mr-4" src="assets/docente-corso-linux-moreno-razzoli.jpg" alt="avatar docente corso Reti: Moreno Razzoli" title="Docente del corso Networking 101: Moreno Razzoli">
           <div class="text-center my-5 socials">
 
           </div>
