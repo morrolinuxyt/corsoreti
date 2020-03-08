@@ -388,7 +388,7 @@ Oltre a fornire una visione d'insieme non mancherà - dove opportuno - un'analis
       <p class="m-0 text-center text-white">
         Made with ❤️ by <a href="https://github.com/mrriky54" target="_blank">Riccardo Carissimi</a><br>
         Parte del progetto <a href="https://morrolinux.it">morrolinux.it</a><br><br>
-        <a href="https://github.com/morrolinuxyt/CorsoLinux" target="_blank"><i class="fa fa-github-square mx-2" aria-hidden="true"></i></a>
+        <a href="https://github.com/morrolinuxyt/corsoreti" target="_blank"><i class="fa fa-github-square mx-2" aria-hidden="true"></i></a>
         <a href="https://www.facebook.com/MorrolinuxOfficial/" target="_blank"><i class="fa fa-facebook-square mx-2" aria-hidden="true"></i></a>
         <a href="https://twitter.com/morrolinux/" target="_blank"><i class="fa fa-twitter-square mx-2" aria-hidden="true"></i></a>
         <a href="https://www.youtube.com/user/morrolinux/" target="_blank"><i class="fa fa-youtube-square mx-2" aria-hidden="true"></i></a>
