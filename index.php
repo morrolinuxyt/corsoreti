@@ -199,6 +199,25 @@ Oltre a fornire una visione d'insieme non mancherà - dove opportuno - un'analis
                         </div>
                     </div>
                 </div>
+
+                <div class="card">
+                    <div class="card-header" id="accordion-tab-1-heading-3">
+                        <h5>
+                            <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#accordion-tab-1-content-3" aria-expanded="false" aria-controls="accordion-tab-1-content-3">
+                              Il corso è fruibile anche offline?
+                            </button>
+                        </h5>
+                    </div>
+                    <div class="collapse " id="accordion-tab-1-content-3" aria-labelledby="accordion-tab-1-heading-3" data-parent="#accordion-tab-1">
+                        <div class="card-body">
+                            <p>
+                             Il corso è sempre disponibile offline su dispositivi iOS e Android. Tramite l'app potrai scaricare i video per vederli sucessivamente offline.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+
             </div>
         </div>
       </div>
