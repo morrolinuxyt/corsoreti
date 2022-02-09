@@ -419,7 +419,7 @@ Oltre a fornire una visione d'insieme non mancherà - dove opportuno - un'analis
   <footer class="py-5 bg-dark">
     <div class="container footer">
       <p class="m-0 text-center text-white">
-        Made with ❤️ by <a href="https://github.com/mrriky54" target="_blank">Riccardo Carissimi</a><br>
+        Made with ❤️ by <a href="https://github.com/r-carissimi" target="_blank">Riccardo Carissimi</a><br>
         Parte del progetto <a href="https://morrolinux.it">morrolinux.it</a><br><br>
         <a href="https://github.com/morrolinuxyt/corsoreti" target="_blank"><i class="fa fa-github-square mx-2" aria-hidden="true"></i></a>
         <a href="https://www.facebook.com/MorrolinuxOfficial/" target="_blank"><i class="fa fa-facebook-square mx-2" aria-hidden="true"></i></a>
