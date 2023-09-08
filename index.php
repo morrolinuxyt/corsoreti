@@ -99,7 +99,7 @@
 	Essere parte di questa realtà significa lavorare in un settore <b>stimolante</b>, ricco di sfide e <b>in continua evoluzione</b>.
       </p>
       <div class="yt_video">
-         <iframe src="https://www.youtube-nocookie.com/embed/giF9F8s9hnU" frameborder="0" allowfullscreen></iframe><br /><br />
+         <iframe src="https://www.youtube-nocookie.com/embed/giF9F8s9hnU?rel=0" frameborder="0" allowfullscreen></iframe><br /><br />
       </div>
     </div>
   </section>
