@@ -3,6 +3,8 @@
 
 <head>
 
+  <script defer src="https://analytics.morrolinux.it/script.js" data-website-id="5906426d-8a22-45b4-bd1a-99faa2bd4ebd"></script>
+
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -83,7 +85,7 @@
         <div class="col-12 text-center text-white">
           <h1 class="font-weight-light">Il corso bestseller italiano sul Networking</h1>
           <p class="lead">impara i fondamenti della tecnologia che ha rivoluzionato il nostro modo di comunicare</p>
-          <a class="btn btn-lg btn-outline-light js-scroll-trigger" href="#courses">Scopri</a>
+          <a data-umami-event="header_button_scopri" class="btn btn-lg btn-outline-light js-scroll-trigger" href="#courses">Scopri</a>
         </div>
       </div>
     </div>
@@ -143,7 +145,7 @@ O forse stai solo studiando per un <b>compito di sistemi</b>? Che tu sia un <b>a
 	Nello svolgimento del corso, vedremo in dettaglio questo ed altri esempi di vitale importanza per un consapevole uso della rete.
       </p>
       <div class="card-deck">
-        <a class="invisible-link" href="<?php echo $n101; ?>">
+        <a data-umami-event="goto_n101_INVISIBLE" class="invisible-link" href="<?php echo $n101; ?>">
           <div class="card">
             <img src="assets/corso-networking-101-cover.jpg" class="card-img-top" alt="Copertina corso Networking 101" title="Corso di Reti online in italiano">
             <div class="card-body d-flex flex-column">
@@ -152,7 +154,7 @@ O forse stai solo studiando per un <b>compito di sistemi</b>? Che tu sia un <b>a
 		Percorreremo tutti i livelli dello stack TCP/IP soffermandoci sul funzionamento in dettaglio di tecnologie e protocolli di particolare attualità o rilevanza.
 Oltre a fornire una visione d'insieme non mancherà - dove opportuno - un'analisi critica di debolezze e vulnerabilità dei protocolli in esame. <br><br>
               </p>
-              <a title="Corso Networking 101" href="<?php echo $n101; ?>" class="btn btn-primary mt-auto">Vai al corso</a>
+              <a data-umami-event="goto_n101" title="Corso Networking 101" href="<?php echo $n101; ?>" class="btn btn-primary mt-auto">Vai al corso</a>
             </div>
           </div>
         </a>
@@ -228,16 +230,17 @@ Oltre a fornire una visione d'insieme non mancherà - dove opportuno - un'analis
   <section id="reviews">
     <div class="text-center">
       <h2>Fidati di chi l'ha già acquistato</h2>
-      <div id="slider" class="carousel slide" data-ride="carousel">
+      <div id="slider" class="carousel slide" data-ride="carousel" data-interval="8000" style="width:100%; height: 130px !important;">
         <div class="carousel-inner col-sm-9 ml-auto mr-auto">
 
           <div class="carousel-item active">
             <p class="review-body">
               <i class="fa fa-quote-left" aria-hidden="true"></i>
-		Eccezionale ! Complimenti per essere riuscito a riassumure un quantitativo di infromazioni, relativo ad un tema così complesso, in soli 4,5 ore. Molto utile per coloro che hanno già visto qualcosa in merito ma hanno idee confuse.
+              Corso ben fatto, per tutti quelli come me che non hanno conoscenze pregresse e vogliono imparare con buone basi l'argomento. <br>
+              Due corsi di Morro in poche settimane, insegnante eccezionale.              
               <i class="fa fa-quote-right" aria-hidden="true"></i>
             </p>
-            <p class="review-name">Leonid, studente "Networking 101"</p>
+            <p class="review-name"><i>Beauregard, studente "Networking 101"</i></p>
             <div class="stars">
               <i class="fa fa-star fa-lg" aria-hidden="true"></i>
               <i class="fa fa-star fa-lg" aria-hidden="true"></i>
@@ -250,10 +253,12 @@ Oltre a fornire una visione d'insieme non mancherà - dove opportuno - un'analis
           <div class="carousel-item">
             <p class="review-body">
               <i class="fa fa-quote-left" aria-hidden="true"></i>
-		Seguivo Morrolinux su youtube da quando ho cominciato a lavorae nella cyber security ed ho preso questo corso proprio perche ' conoscevo le sue doti espilcative e non mi ha deluso.Perfetto per chi vuole capire bene il network
+              Corso ben sviluppato e organizzato, di facile comprensione per i neofiti della materia e, soprattutto, insegnante di grande qualità con <br>
+              notevoli capacità di spiegazione, sintetizzazione (senza mai essere superficiale negli argomenti trattati) e chiarezza <br>
+              sia a livello teorico che rappresentativo tramite l'ausilio delle slide. Corso vivamente consigliato.
               <i class="fa fa-quote-right" aria-hidden="true"></i>
             </p>
-            <p class="review-name">Manuel, studente "Networking 101"</p>
+            <p class="review-name"><i>Gioele, studente "Networking 101"</i></p>
             <div class="stars">
               <i class="fa fa-star fa-lg" aria-hidden="true"></i>
               <i class="fa fa-star fa-lg" aria-hidden="true"></i>
@@ -266,26 +271,12 @@ Oltre a fornire una visione d'insieme non mancherà - dove opportuno - un'analis
           <div class="carousel-item">
             <p class="review-body">
               <i class="fa fa-quote-left" aria-hidden="true"></i>
-		Corso che consiglio a quanti hanno bisogno di avere delle conoscienze basilari sulle reti. L'istruttore è veramente bravo e riesce a spiegare in modo semplice concetti anche complessi (come ad esempio il subnetting ed il supernetting). Mi ritengo quindi soddisfatto.
+              Esperienza più che positiva, sono sempre stato molto curioso di capire come funzionano le reti<br>
+              ma ho sempre pensato che non fosse alla mia portata. <br>
+              Questo corso ha reso ognuno degli argomenti trattati comprensibili.              
               <i class="fa fa-quote-right" aria-hidden="true"></i>
             </p>
-            <p class="review-name">Pasquale, studente "Networking 101"</p>
-            <div class="stars">
-              <i class="fa fa-star fa-lg" aria-hidden="true"></i>
-              <i class="fa fa-star fa-lg" aria-hidden="true"></i>
-              <i class="fa fa-star fa-lg" aria-hidden="true"></i>
-              <i class="fa fa-star fa-lg" aria-hidden="true"></i>
-              <i class="fa fa-star-o fa-lg" aria-hidden="true"></i>
-            </div>
-          </div>
-
-          <div class="carousel-item">
-            <p class="review-body">
-              <i class="fa fa-quote-left" aria-hidden="true"></i>
-		Ho preso il corso a occhi chiusi conoscendo già l’autore dal suo canale YouTube. Comunque finora corso molto utile e spiegato bene. Lo affianco a lezioni di un corso di sicurezza informatica.
-              <i class="fa fa-quote-right" aria-hidden="true"></i>
-            </p>
-            <p class="review-name">Jacopo, studente "Networking 101"</p>
+            <p class="review-name"><i>Marco, studente "Networking 101"</i></p>
             <div class="stars">
               <i class="fa fa-star fa-lg" aria-hidden="true"></i>
               <i class="fa fa-star fa-lg" aria-hidden="true"></i>
@@ -298,10 +289,12 @@ Oltre a fornire una visione d'insieme non mancherà - dove opportuno - un'analis
           <div class="carousel-item">
             <p class="review-body">
               <i class="fa fa-quote-left" aria-hidden="true"></i>
-		Ottimo corso, avevo già acquistato e seguito i corsi Linux LPI di Moreno e avevo riscontrato delle lacune relativi agli argomenti riguardanti le reti. Questo corso è capitato a fagiolo, alcune cose le sapevo già ma per molte altre ho notato che avevo solo una conoscenza sommaria. Molto soddisfatto finora. Edit: terminato il corso mi sento di consigliarlo senza riserve. Ha il pregio di tenere alta l'attenzione dall'inizio alla fine e incuriosire nell'approfondire tanti aspetti trattati. A quando il prossimo corso di Morro?
+              Ho preso il corso a occhi chiusi conoscendo già l’autore dal suo canale YouTube. <br>
+              Comunque finora corso molto utile e spiegato bene. <br>
+              Lo affianco a lezioni di un corso di sicurezza informatica.
               <i class="fa fa-quote-right" aria-hidden="true"></i>
             </p>
-            <p class="review-name">David, studente "Networking 101"</p>
+            <p class="review-name"><i>Jacopo, studente "Networking 101"</i></p>
             <div class="stars">
               <i class="fa fa-star fa-lg" aria-hidden="true"></i>
               <i class="fa fa-star fa-lg" aria-hidden="true"></i>
@@ -314,16 +307,35 @@ Oltre a fornire una visione d'insieme non mancherà - dove opportuno - un'analis
           <div class="carousel-item">
             <p class="review-body">
               <i class="fa fa-quote-left" aria-hidden="true"></i>
-		Molto buona la struttura del corso e la capacità espositiva dell'insegnante. Sicuramente seguirò altri suoi corsi.
+              davvero grande chiarezza espositiva. Un corso fondamentale per iniziare ad avere le basi nel mondo delle reti. <br>
+              Davvero ben strutturato e chiaro. Complimenti.
               <i class="fa fa-quote-right" aria-hidden="true"></i>
             </p>
-            <p class="review-name">Alan, studente "Networking 101"</p>
+            <p class="review-name"><i>Dario, studente "Networking 101"</i></p>
             <div class="stars">
               <i class="fa fa-star fa-lg" aria-hidden="true"></i>
               <i class="fa fa-star fa-lg" aria-hidden="true"></i>
               <i class="fa fa-star fa-lg" aria-hidden="true"></i>
               <i class="fa fa-star fa-lg" aria-hidden="true"></i>
-              <i class="fa fa-star-o fa-lg" aria-hidden="true"></i>
+              <i class="fa fa-star fa-lg" aria-hidden="true"></i>
+            </div>
+          </div>
+
+          <div class="carousel-item">
+            <p class="review-body">
+              <i class="fa fa-quote-left" aria-hidden="true"></i>
+              Ottimo corso di facile comprensione per un'introduzione di base alle reti, il metodo di insegnamento usato <br>
+              che va dritto la punto senza perdersi in troppi giri di parole e facendo esempi semplici e intuitivi è perfetto <br>
+              per trasferire al meglio le conoscenze oggetto del corso, davvero complimenti!              
+              <i class="fa fa-quote-right" aria-hidden="true"></i>
+            </p>
+            <p class="review-name"><i>Fabio, studente "Networking 101"</i></p>
+            <div class="stars">
+              <i class="fa fa-star fa-lg" aria-hidden="true"></i>
+              <i class="fa fa-star fa-lg" aria-hidden="true"></i>
+              <i class="fa fa-star fa-lg" aria-hidden="true"></i>
+              <i class="fa fa-star fa-lg" aria-hidden="true"></i>
+              <i class="fa fa-star fa-lg" aria-hidden="true"></i>
             </div>
           </div>
 
