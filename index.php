@@ -3,7 +3,7 @@
 
 <head>
 
-  <script defer src="https://analytics.morrolinux.it/script.js" data-website-id="5906426d-8a22-45b4-bd1a-99faa2bd4ebd"></script>
+  <script async defer data-website-id="d793bf3d-8b31-4c09-845f-c042e9481f26" src="https://analytics.morrolinux.it/umami.js"></script>
 
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
