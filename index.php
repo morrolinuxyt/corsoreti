@@ -18,6 +18,8 @@
 
   <meta name="description" content="Studia i fondamenti del Networking: un settore in continua evoluzione - corso bestseller italiano. Scopri la nostra selezione di corsi ideati su misura per te!">
 
+  <link rel="canonical" href="https://corsoreti.it/">
+
   <title>Networking 101: il corso bestseller in italiano | Corso Reti</title>
 
 <?php include 'snippets/theme-init.php';?>
