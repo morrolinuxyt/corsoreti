@@ -19,9 +19,22 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
+      # Oltre a latest, ogni build ha un tag immutabile con lo SHA corto del
+      # commit (es. sha-12c5acf): rollback immediato e versione fissabile
+      # nel manifest k8s.
+      - name: Docker metadata
+        id: meta
+        uses: docker/metadata-action@v5
+        with:
+          images: morrolinux/corsoreti-it
+          tags: |
+            type=sha
+            type=raw,value=latest
+
       - name: Build and push Docker image
         uses: docker/build-push-action@v6
         with:
           push: true
-          tags: morrolinux/corsoreti-it:latest
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
 
