@@ -5,8 +5,8 @@
  */
 @import url(https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css);
 /*@import url(https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/brands.min.css);*/
-/*@import url('https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i&display=swap');
-@import url('https://fonts.googleapis.com/css?family=Roboto+Condensed:300,300i,400,400i,700,700i&display=swap');*/
+/* @import url('https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i&display=swap'); */
+/* @import url('https://fonts.googleapis.com/css?family=Roboto+Condensed:300,300i,400,400i,700,700i&display=swap'); */
 
 body {
   font-family: 'Ubuntu', sans-serif;
@@ -17,7 +17,8 @@ h1, h2, h3, h4, .navbar-brand {
 }
 
 section {
-  padding: 100px 0;
+  /* padding: 100px 0; */
+  padding: 6rem 0;
 }
 
 .container p {
@@ -32,13 +33,98 @@ section {
   font-weight: 600;
 }
 
+/* Le schede corso parlano la stessa lingua di .feature-item / .info-panel /
+   .syllabus-module: stesso raggio, stessa hairline, stessa reazione al hover.
+   Il vecchio "box-shadow: gray" era l'unica ombra piatta rimasta in pagina. */
 .card {
+  background-color: var(--panel);
+  border: 1px solid var(--hairline);
+  border-radius: 10px;
+  overflow: hidden;                 /* la copertina segue gli angoli tondi */
+  transition: transform .2s ease-in-out, border-color .2s ease-in-out, box-shadow .2s ease-in-out;
+}
+
+.card:hover, .card:focus, .card:focus-within {
+  transform: translateY(-2px);
+  border-color: var(--accent);
+  box-shadow: var(--shadow-md);
+}
+
+/* Schede in griglia tutte alte quanto la più alta della riga.
+   Attenzione: qui NON si può agire sul link che avvolge la scheda. Quel link
+   ne contiene un altro (il pulsante "Vai al corso") e l'HTML non ammette
+   ancore annidate: il parser spezza quella esterna e lascia in pagina delle
+   ancore fantasma vuote, sorelle della scheda. Dando loro flex o larghezza
+   si prendono metà riga e strozzano la scheda.
+   Si lavora quindi sulla colonna, che è un elemento sano: diventa una
+   colonna flex e la scheda si stira dentro. */
+.card-deck > [class^="col-"],
+.card-deck > [class*=" col-"] {
+  display: flex;
+  flex-direction: column;
+}
+
+.card-deck > [class^="col-"] > .card,
+.card-deck > [class*=" col-"] > .card {
+  flex: 1 1 auto;
+}
+
+.card-body {
+  padding: 1.75rem;
+}
+
+.card-title {
+  margin-bottom: 1rem;
+  font-weight: 700;
+}
+
+.card-text {
+  color: var(--ink-muted);
+  line-height: 1.75;
+}
+
+.testimonial {
+  width: 75%;
+  margin-left: auto;
+  margin-right: auto;
+  box-shadow: var(--shadow-md);
+  border-radius: 5px;
+  margin-bottom: 2rem; 
+  margin-top: 2rem;
   transition: all .2s ease-in-out;
 }
 
-.card:hover, .card:focus {
+.testimonial:hover, .testimonial:focus {
   transform: scale(1.01);
-  box-shadow: 0 10px 20px gray;
+  box-shadow: var(--shadow-lg);
+}
+
+img.rounded-corners {
+  border-radius: 5px;
+  mix-blend-mode: multiply;
+}
+
+.landing-page img.rounded-corners {
+  mix-blend-mode: var(--img-blend);
+  border: 1px solid var(--img-border);
+}
+
+blockquote {
+  margin: 0;
+}
+
+blockquote p {
+  padding: 15px;
+  background: #eee;
+  border-radius: 5px;
+}
+
+blockquote p::before {
+  content: '\201C';
+}
+
+blockquote p::after {
+  content: '\201D';
 }
 
 .invisible-link {
@@ -58,13 +144,17 @@ section {
   font-weight: 700;
 }
 
+/* Le didascalie sotto ai grafici a ciambella sono h5, quindi 1.25rem: erano
+   più grandi del testo corrente che le precede. Sono didascalie, stanno un
+   gradino sotto. */
+.doughnut h5 {
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
 .stats .fa {
   color: white;
   font-size: 60px;
-}
-
-#statistics {
-  background-color: #7eb5ea;
 }
 
 .testimonials-header {
@@ -75,19 +165,39 @@ section {
   padding: 6px;
 }
 
-#reviews {
-  color: #5d564f;
-  background: #f7f7f7;
+#recensioni {
+  color: var(--ink);
+  background: var(--page-bg);
+  border-top: 1px solid var(--hairline);
+  border-bottom: 1px solid var(--hairline);
 }
 
-#reviews h2 {
-  font-size: 1.75rem;
+/* Il titolo delle recensioni aveva una misura sua, 1.75rem: era l'unico
+   titolo di sezione più piccolo degli altri. Resta il maiuscoletto, la
+   dimensione la prende da .section-title come tutti. */
+#recensioni h2 {
   text-transform: uppercase;
   margin-bottom: 50px;
 }
 
+/* Il carosello aveva height:130px inline e le recensioni più lunghe
+   traboccavano sulla sezione successiva. Qui l'altezza è libera di crescere,
+   e il minimo — pari alla slide più alta — evita che la pagina sobbalzi
+   quando le recensioni ruotano. */
+#recensioni .carousel-inner {
+  min-height: 184px;
+}
+
+@media (max-width: 767.98px) {
+  #recensioni .carousel-inner {
+    min-height: 280px;
+  }
+}
+
+/* i 25px di margine laterale rendevano la citazione più stretta del nome che
+   la firma, dentro allo stesso riquadro */
 .review-body {
-  margin: 0 25px;
+  margin: 0;
 }
 
 .fa-quote-left {
@@ -105,6 +215,29 @@ section {
 .carousel-control-next,
 .carousel-control-prev {
   filter: invert(100%);
+}
+
+.landing-page .carousel-control-next,
+.landing-page .carousel-control-prev {
+  filter: var(--carousel-invert);
+}
+
+/* Su schermi stretti il testo delle recensioni occupa tutta la larghezza e le
+   frecce, centrate in verticale, ci finivano sopra. Qui scendono in una
+   fascia libera sotto al carosello. Il margin-top inline (-3rem) va annullato
+   con !important. */
+@media (max-width: 767.98px) {
+  #slider {
+    padding-bottom: 3rem;
+  }
+
+  #slider .carousel-control-prev,
+  #slider .carousel-control-next {
+    top: auto;
+    bottom: 0;
+    height: 3rem;
+    margin-top: 0 !important;
+  }
 }
 
 .socials .fa {
@@ -131,6 +264,9 @@ section {
 }
 
 .landing {
+  /* Ancora .bg, il video e lo scrim all'header invece che al viewport:
+     senza, restano incollati in cima appena qualcosa spinge giù l'header. */
+  position: relative;
   height: 100vh;
   min-height: 500px;
   /*
@@ -140,13 +276,25 @@ section {
   */
 }
 
+.yt_video {
+  position: relative;
+  aspect-ratio: 16 / 9;
+}
+
+.yt_video iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
 .landing video {
   position: absolute;
   z-index:-98;
   height:100%;
   width: 100%;
   object-fit:cover;
-  filter: brightness(80%);
+  filter: brightness(30%);
 }
 
 .landing h1 {
@@ -170,15 +318,9 @@ section {
   padding-top: 0px;
 }
 
-#particles-js{
-  width: 100%;
-  height: 100%;
-  background-color: #5d564f;
-  background-image: url('../assets/night-sky.jpg');
-  background-size: cover;
-  background-position: 50% 50%;
-  background-repeat: no-repeat;
-  position: absolute;
+#percorso{
+  background-color: #FFFFFF;
+  color: black;
 }
 
 /*FAQ courtesy of https://codepen.io/moso/pen/vKGxMx?editors=1100*/
@@ -260,4 +402,1384 @@ section {
 
 .collapse.show .card-body {
   border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+}
+
+span.keeptogether {
+  white-space: nowrap ;
+}
+
+.banner {
+  margin:0 auto;padding:10px
+}
+
+.banner:hover {
+  text-decoration:none
+}
+
+.banner div {
+  background-color: var(--promo);
+  padding:20px;
+  border-radius:10px;
+  text-align:center;
+  color: var(--promo-ink);
+  font-size:1.1em;
+  opacity:1
+}
+
+.banner div:hover {
+  opacity:1
+}
+
+.banner img {
+  animation:blinker 1s linear infinite;
+  width:15px;
+  height:15px;
+  margin-top:-3px
+}
+
+.btn-special-offer,
+.btn-special-offer:hover,
+.btn-special-offer:focus,
+.btn-special-offer:not(:disabled):not(.disabled):active {
+  color: var(--promo-ink);
+  font-weight: bold;
+  background-color: var(--promo);
+  border-color: var(--promo);
+}
+
+.btn-special-offer:hover,
+.btn-special-offer:focus,
+.btn-special-offer:not(:disabled):not(.disabled):active {
+  background-color: var(--promo-hover);
+  border-color: var(--promo-hover);
+}
+
+.btn-special-offer:focus {
+  box-shadow: 0 0 0 .2rem rgba(255, 101, 28, .4);
+}
+
+.btn-primary,
+.btn-primary:not(:disabled):not(.disabled):active {
+  background-color: var(--cta);
+  border-color: var(--cta);
+  color: var(--cta-ink);
+}
+
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary:not(:disabled):not(.disabled):active {
+  background-color: var(--cta-hover);
+  border-color: var(--cta-hover);
+  color: var(--cta-ink);
+}
+
+.btn-primary:focus {
+  box-shadow: 0 0 0 .2rem rgba(50, 108, 229, .4);
+}
+
+/* I pulsanti in fondo alla scheda: affiancati e di pari larghezza, in colonna
+   quando lo spazio non basta. mt-auto sul contenitore li tiene incollati in
+   fondo, così le schede di una riga chiudono tutte allo stesso modo. */
+/* Aria fra il testo che introduce una famiglia di corsi e la griglia che la
+   mostra: prima erano 16px, o dei <br> in coda al paragrafo. */
+.section-note + .card-deck,
+.section-lead + .card-deck,
+.section-subtitle + .card-deck,
+.section-note + .card-list,
+.section-lead + .card-list,
+.section-subtitle + .card-list,
+.section-note + .container,
+.section-lead + .container {
+  margin-top: 3rem;
+}
+
+/* Le schede del catalogo sono le stesse ovunque: quelle LPI ereditavano il
+   text-center del contenitore e il loro testo restava centrato, a differenza
+   di tutte le altre. */
+.card-deck .card-body {
+  text-align: left;
+}
+
+/* Tutta la scheda è cliccabile: un'ancora vuota stesa sopra, non un wrapper
+   (un <a> attorno alla scheda conterrebbe il pulsante, e le ancore annidate
+   lasciavano in pagina copie vuote che rompevano la griglia).
+   Sopra ci restano il pulsante e il "leggi di più" in coda al testo, che
+   mantengono i loro eventi: la superficie porta ad approfondire, il pulsante
+   all'acquisto. Il prezzo è che il testo della scheda non si seleziona più
+   col mouse. */
+.card-link {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1;
+}
+
+/* Sopra alla superficie: il pulsante (anche quando non sta in .card-actions,
+   come nelle schede d'acquisto scritte a mano delle landing) e il "leggi di
+   più" in coda al testo. */
+.card-actions,
+.card-body > .btn,
+.card-text a {
+  position: relative;
+  z-index: 2;
+}
+
+.card-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .75rem;
+}
+
+.card-actions .btn {
+  /* base stretta apposta: nelle colonne da un terzo i due pulsanti devono
+     starci affiancati come in quelle da metà, non impilarsi. */
+  flex: 1 1 7rem;
+}
+
+/* Pastiglia "Novità": appoggiata sull'angolo della copertina. Accanto al
+   titolo finiva a capo da sola su tutti i titoli lunghi, e sembrava un pezzo
+   di testo smarrito. */
+.card-badge {
+  position: absolute;
+  top: .75rem;
+  right: .75rem;
+  z-index: 2;
+  padding: .3em .75em;
+  border-radius: 999px;
+  background-color: var(--promo);
+  color: var(--promo-ink);
+  font-size: .72rem;
+  font-weight: 700;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, .25);
+}
+
+/* ============================================================
+   Blocchi riutilizzabili per le landing dei corsi
+   L'accento è per-pagina, impostato sul body:
+     <body style="--accent: #326ce5">
+   La velatura --accent-soft ne viene derivata qui sotto, per tema.
+   ============================================================ */
+
+:root {
+  --accent: #ff651c;
+
+  /* Colonna di lettura: testo, programma e FAQ condividono lo stesso bordo
+     sinistro e destro. Le griglie (tessere, pannelli, schede) restano piene:
+     due larghezze in tutta la pagina, non tre. */
+  --measure: 780px;
+
+  /* Colonna larga: griglie ed elenchi di schede. Sta fra la colonna di
+     lettura e la larghezza piena del contenitore. */
+  --measure-wide: 960px;
+
+  /* Il pulsante "Vai al corso" è lo stesso ovunque: la CTA è un elemento
+     dell'interfaccia, non dell'identità della singola landing. Riconoscibile
+     di pagina in pagina e sempre distinta dall'arancio dell'offerta. */
+  --cta: #326ce5;
+  --cta-hover: #2757b8;
+  --cta-ink: #ffffff;
+
+  /* L'arancio dell'offerta è uguale su ogni pagina: è il colore della promo,
+     non dell'accento, e deve restare distinguibile dalla CTA. */
+  --promo: #ff651c;
+  --promo-hover: #ff5100;
+  --promo-ink: #ffffff;
+
+  --ink: #2f3437;
+  --ink-muted: #6b7378;
+  --surface: #f6f8fa;
+  --panel: #ffffff;
+  --hairline: #e3e6ea;
+
+  --page-bg: #ffffff;
+  --nav-bg: #343a40;
+  --nav-border: transparent;
+  --link: #007bff;
+  --link-hover: #0056b3;
+  --shadow-md: 0 8px 18px rgba(0, 0, 0, .07);
+  --shadow-lg: 0 10px 20px gray;
+
+  /* gli screenshot delle testimonianze hanno fondo bianco: su pagina chiara
+     il multiply lo fonde con la pagina, su fondo scuro li annerirebbe */
+  --img-blend: multiply;
+  --img-border: transparent;
+  /* le frecce del carosello sono bianche: invertite diventano nere,
+     giusto su fondo chiaro, invisibili su fondo scuro */
+  --carousel-invert: invert(100%);
+}
+
+body {
+  --accent-soft: rgba(0, 0, 0, .06);                                /* ripiego */
+  --accent-soft: color-mix(in srgb, var(--accent) 12%, transparent);
+
+}
+
+/* Sopra alla prima sezione c'è l'hero, alto quanto lo schermo: i 6rem di
+   respiro servono a separare due blocchi di contenuto, non a staccarsi da un
+   video a tutta pagina. */
+.landing + section {
+  padding-top: 3.5rem;
+}
+
+/* Container annidati: Bootstrap dà a ognuno 15px di padding orizzontale e un
+   max-width proprio, quindi un .container dentro un altro rientra di 15px per
+   lato e finisce disallineato rispetto ai blocchi al primo livello (1110
+   contro 1140). Nelle pagine nate per aggregazione ce ne sono parecchi: qui
+   il secondo livello smette di stringere. */
+.container .container {
+  max-width: none;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+/* Ritmo verticale: sezioni alternate al posto dei margini negativi */
+.section-alt {
+  background-color: var(--surface);
+  border-top: 1px solid var(--hairline);
+  border-bottom: 1px solid var(--hairline);
+}
+
+.section-title {
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+
+/* Sottotitolo di sezione: separa le famiglie del catalogo dentro un'unica
+   sezione, senza competere col titolo. */
+/* Un titolo di famiglia che arriva dopo un blocco di schede ha bisogno di
+   più aria di uno che segue del testo: deve staccarsi dalla griglia sopra,
+   non solo dal paragrafo. */
+.card-list + .section-subtitle,
+.card-deck + .section-subtitle {
+  margin-top: 5.5rem;
+}
+
+.section-subtitle {
+  margin: 3rem 0 1.75rem;
+  font-size: 1.75rem;
+  font-weight: 600;
+  text-align: center;
+}
+
+.section-lead {
+  max-width: var(--measure);
+  margin-left: auto;
+  margin-right: auto;
+  /* Inchiostro pieno, non smorzato: è la frase che presenta la sezione,
+     non una nota a margine. */
+  color: var(--ink);
+}
+
+/* Evidenziatore: un segno tirato a mano, storto e che sborda dalle lettere.
+   Sta in un ::before dietro al testo e non in un background, perché gli
+   elementi inline non si possono ruotare: solo così il segno può essere
+   inclinato e uscire dai bordi invece di ricalcare la scatola del testo.
+   Il prezzo è che la spanna evidenziata non può andare a capo (è un
+   inline-block), quindi va usata su poche parole — che è poi il modo in cui
+   un evidenziatore vero si usa. */
+.marker {
+  position: relative;
+  display: inline-block;
+  z-index: 0;
+  padding: 0 .1em;
+  /* il segno sborda a sinistra e a destra: senza questi margini finirebbe
+     addosso alle parole vicine */
+  margin: 0 .45em 0 .4em;
+  color: #1a1d20;
+}
+
+.marker::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  left: -.35em;
+  right: -.4em;
+  /* il segno stringe il testo da sopra e da sotto: un evidenziatore vero
+     lascia poco margine sulle maiuscole, non una fascia intera. Sotto
+     rientra più che sopra: le lettere non hanno discendenti qui, e il tratto
+     appoggiato alla linea di base si legge come una passata, non come un
+     riquadro. I due valori si spostano in coppia: cambiarne uno solo
+     cambierebbe lo spessore invece della quota */
+  top: .21em;
+  bottom: .16em;
+  background: var(--accent);
+  /* appena smussati: quel tanto che basta a togliere lo spigolo netto senza
+     tornare alla pastiglia di prima. Raggi disuguali, e diversi fra
+     orizzontale e verticale, così il taglio non sembra fatto col righello */
+  border-radius: .16em .24em .14em .22em / .22em .14em .24em .16em;
+  transform: rotate(-1.2deg) skewX(-4deg);
+  transform-origin: left center;
+}
+
+/* Il tratto si disegna quando la frase entra in campo, non al caricamento:
+   la classe la mette lo script quando l'osservatore lo segnala. Senza JS il
+   segno è semplicemente già disegnato — lo stato di riposo qui sopra è
+   quello finito, non quello vuoto. */
+.marker.is-inview::before {
+  animation: marker-in .8s cubic-bezier(.2, .75, .3, 1) both;
+}
+
+@keyframes marker-in {
+  from { transform: rotate(-1.2deg) skewX(-4deg) scaleX(0); }
+  to   { transform: rotate(-1.2deg) skewX(-4deg) scaleX(1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marker.is-inview::before {
+    animation: none;
+  }
+}
+
+.section-note {
+  max-width: var(--measure);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Il testo corrente era l'unico blocco rimasto senza trattamento: colore di
+   default, interlinea 1.5 e 1.1em di corpo giustificato — denso e slegato dai
+   pannelli accanto.
+   Il corpo è 17,5px: a 20,8 — la misura della frase-manifesto — il testo
+   corrente diventava lui stesso un titolo e la gerarchia si appiattiva; ai
+   16,8 di partenza era faticoso da leggere. */
+.container .section-note,
+.container .section-lead {
+  font-size: 1.09375rem;                                            /* 17,5px */
+  line-height: 1.75;
+}
+
+/* L'h2 di Bootstrap vale 2rem, appena sopra ai 1.75rem del titolo di
+   famiglia: troppo vicini perché il secondo si legga come subordinato al
+   primo. Qui il salto è netto. */
+.section-title {
+  font-size: 2.6rem;
+}
+
+.section-note {
+  color: var(--ink);
+}
+
+.section-note + .section-note {
+  margin-top: 1.5rem;
+}
+
+/* Il grassetto marcava le parole chiave a peso 700 su testo lungo: troppo
+   "a macchia". A 600 segnala senza spezzare la riga. */
+.section-note b,
+.section-note strong,
+.section-lead b,
+.section-lead strong {
+  font-weight: 600;
+}
+
+.section-note i,
+.section-note em {
+  color: var(--ink-muted);
+}
+
+/* Frase-manifesto in mezzo al testo corrente: unico blocco centrato, ora ha
+   un peso suo invece di essere un paragrafo come gli altri. */
+.container .section-claim {
+  max-width: 620px;
+  margin: 3rem auto;
+  color: var(--ink);
+  font-size: 1.3rem;
+  line-height: 1.6;
+  text-align: center;
+}
+
+.section-claim b,
+.section-claim strong {
+  font-weight: 700;
+}
+
+/* Immagini a corredo del testo: stessa colonna di lettura dei paragrafi,
+   così il blocco non sfonda la misura quando è in mezzo al discorso.
+   Vale anche per le <img> messe direttamente dentro a un .section-note. */
+.section-figure,
+.section-note > img {
+  display: block;
+  width: 100%;
+  max-width: var(--measure);
+  margin: 2.5rem auto;
+  border-radius: 10px;
+  box-shadow: var(--shadow-md);
+}
+
+/* Tessere con icona (es. "Cosa imparerai") */
+.feature-item {
+  display: flex;
+  align-items: flex-start;
+  height: 100%;
+  padding: 1.25rem;
+  background-color: var(--panel);
+  border: 1px solid var(--hairline);
+  border-radius: 10px;
+  transition: all .2s ease-in-out;
+}
+
+.feature-item:hover {
+  transform: translateY(-2px);
+  border-color: var(--accent);
+  box-shadow: var(--shadow-md);
+}
+
+.feature-item .fa {
+  flex: 0 0 auto;
+  width: 42px;
+  height: 42px;
+  margin-right: 1rem;
+  border-radius: 50%;
+  background-color: var(--accent-soft);
+  color: var(--accent);
+  font-size: 18px;
+  line-height: 42px;
+  text-align: center;
+}
+
+.feature-item span {
+  color: var(--ink);
+  line-height: 1.5;
+}
+
+/* Pannelli affiancati (es. "A chi è rivolto" / "Prerequisiti") */
+.info-panel {
+  height: 100%;
+  padding: 1.75rem;
+  background-color: var(--panel);
+  border: 1px solid var(--hairline);
+  border-top: 4px solid var(--accent);
+  border-radius: 10px;
+}
+
+.info-panel h5 {
+  margin-bottom: 1.25rem;
+  font-weight: 700;
+}
+
+.icon-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.icon-list li {
+  position: relative;
+  padding-left: 1.9rem;
+  margin-bottom: .75rem;
+  color: var(--ink);
+}
+
+.icon-list li:last-child {
+  margin-bottom: 0;
+}
+
+.icon-list li::before {
+  content: "\f00c";
+  font-family: FontAwesome;
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: var(--accent);
+}
+
+/* Programma del corso */
+.syllabus {
+  max-width: var(--measure);
+  margin: 0 auto;
+}
+
+.syllabus-module {
+  margin-bottom: .75rem;
+  background-color: var(--panel);
+  border: 1px solid var(--hairline);
+  border-radius: 10px;
+  overflow: hidden;
+  transition: border-color .2s ease-in-out, box-shadow .2s ease-in-out;
+}
+
+.syllabus-module:hover {
+  border-color: var(--accent);
+}
+
+.syllabus-toggle {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 1.1rem 1.25rem;
+  background: none;
+  border: 0;
+  color: var(--ink);
+  font-weight: 700;
+  font-size: 1.05rem;
+  text-align: left;
+  white-space: normal;
+}
+
+.syllabus-toggle:hover,
+.syllabus-toggle:focus,
+.syllabus-toggle:active {
+  color: var(--accent);
+  text-decoration: none;
+  outline: none;
+  box-shadow: none;
+}
+
+.syllabus-num {
+  flex: 0 0 auto;
+  width: 38px;
+  height: 38px;
+  margin-right: 1rem;
+  border-radius: 10px;
+  background-color: var(--accent-soft);
+  color: var(--accent);
+  font-weight: 700;
+  line-height: 38px;
+  text-align: center;
+}
+
+.syllabus-name {
+  flex: 1 1 auto;
+}
+
+.syllabus-chevron {
+  flex: 0 0 auto;
+  margin-left: 1rem;
+  color: var(--ink-muted);
+  transition: transform .2s ease-in-out;
+}
+
+.syllabus-toggle[aria-expanded="true"] .syllabus-chevron {
+  transform: rotate(180deg);
+  color: var(--accent);
+}
+
+.syllabus-lessons {
+  list-style: none;
+  margin: 0;
+  padding: 0 1.25rem 1.25rem 4.6rem;
+}
+
+.syllabus-lessons li {
+  position: relative;
+  padding-left: 1.6rem;
+  margin-bottom: .6rem;
+  color: var(--ink-muted);
+}
+
+.syllabus-lessons li:last-child {
+  margin-bottom: 0;
+}
+
+.syllabus-lessons li::before {
+  content: "\f01d";
+  font-family: FontAwesome;
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: var(--accent);
+  opacity: .55;
+}
+
+@media (max-width: 575.98px) {
+  .syllabus-lessons {
+    padding-left: 1.75rem;
+  }
+
+  .syllabus-toggle {
+    font-size: 1rem;
+  }
+}
+
+/* Ripristina il ritmo verticale sulle landing rinnovate: gli snippet
+   condivisi usano ancora margini negativi / padding azzerati. */
+.landing-page #faq {
+  padding-top: 6rem;
+}
+
+.landing-page #corsi {
+  padding-top: 4rem;
+}
+
+/* FAQ con lo stesso linguaggio visivo del programma.
+   Scoped a .landing-page: per estenderlo alle altre pagine
+   basta aggiungere la classe al loro <body>. */
+.landing-page #faq .tab-content {
+  box-shadow: none;
+}
+
+.landing-page #faq .accordion {
+  max-width: var(--measure);
+  margin: 0 auto;
+}
+
+.landing-page #faq .accordion > .card {
+  margin-bottom: .75rem;
+  background-color: var(--panel);
+  border: 1px solid var(--hairline);
+  border-radius: 10px;
+  overflow: hidden;
+  transition: border-color .2s ease-in-out;
+}
+
+.landing-page #faq .accordion > .card:hover,
+.landing-page #faq .accordion > .card:focus {
+  border-color: var(--accent);
+  box-shadow: none;
+  transform: none;
+}
+
+.landing-page #faq .card-header {
+  padding: 0;
+  background-color: var(--panel);
+  border-bottom: 0;
+}
+
+.landing-page #faq .card-header h5 button {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+  padding: 1.1rem 1.25rem;
+  color: var(--ink);
+  font-size: 1.05rem;
+  font-weight: 700;
+  text-align: left;
+  white-space: normal;
+}
+
+.landing-page #faq .card-header h5 button:hover,
+.landing-page #faq .card-header h5 button:focus {
+  color: var(--accent);
+  box-shadow: none;
+}
+
+.landing-page #faq .card-header h5 button::after {
+  content: "\f078";
+  font-family: FontAwesome;
+  flex: 0 0 auto;
+  margin-left: auto;
+  color: var(--ink-muted);
+  font-weight: normal;
+  transition: transform .2s ease-in-out;
+}
+
+.landing-page #faq .card-header h5 button[aria-expanded="true"]::after {
+  transform: rotate(180deg);
+  color: var(--accent);
+}
+
+.landing-page #faq .card-body {
+  padding: 0 1.25rem 1.25rem;
+}
+
+.landing-page #faq .card-body p {
+  margin: 0;
+  color: var(--ink-muted);
+}
+
+.landing-page #faq .collapse.show .card-body {
+  border-bottom: 0;
+}
+
+/* Su schermi stretti il testo giustificato crea "fiumi" di spazi */
+@media (max-width: 767.98px) {
+  .landing-page .text-justify {
+    text-align: left !important;
+  }
+}
+
+/* Hero con teaser scuro: la patina nera (.scrim) fa da velo e la torcia la
+   buca. Nessuna pagina lo usa più — Kubernetes ha unito logo e teaser in un
+   unico hero (.landing--logo + .landing--torch) — ma le regole restano qui
+   come variante pronta all'uso: la torcia ormai è generica.
+   Il dim globale su un teaser già scuro non crea contrasto, spegne solo i
+   tratti del video: si lavora dietro al testo. */
+.landing--dark video {
+  /* Nessun filtro qui: tutto lo scurimento sta nello scrim, così la
+     "torcia" può bucarlo e scoprire il video originale. Il livello piatto
+     al 25% nello scrim equivale esattamente a brightness(75%). */
+  filter: none;
+}
+
+.landing--dark .bg {
+  background-color: #0b0b0b;
+  filter: none;
+}
+
+.landing--dark .scrim {
+  position: absolute;
+  z-index: -97;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background:
+    radial-gradient(ellipse 55% 60% at 50% 50%,
+      rgba(0, 0, 0, .88) 0%,
+      rgba(0, 0, 0, .72) 40%,
+      rgba(0, 0, 0, 0) 78%),
+    linear-gradient(rgba(0, 0, 0, .25), rgba(0, 0, 0, .25));
+}
+
+/* "Torcia": al passaggio del mouse il velo si buca e lascia vedere il
+   video com'è. Le variabili sono aggiornate da js/common.js; a riposo il
+   raggio è 0, quindi l'hero è identico alla versione senza effetto.
+   Solo su puntatori di precisione: su touch l'hover resterebbe incastrato. */
+@media (hover: hover) and (pointer: fine) {
+  .landing--torch .scrim,
+  .landing--torch .veil {
+    -webkit-mask-image: radial-gradient(circle var(--torch-r, 0px) at var(--torch-x, -999px) var(--torch-y, -999px),
+                        transparent 0%, transparent 38%, #000 100%);
+    mask-image: radial-gradient(circle var(--torch-r, 0px) at var(--torch-x, -999px) var(--torch-y, -999px),
+                transparent 0%, transparent 38%, #000 100%);
+  }
+
+  /* Col cursore sul titolo il faro scoprirebbe il video proprio dietro
+     alle scritte: il testo si fa da parte. La CTA resta piena. */
+  .landing--torch h1,
+  .landing--torch .lead {
+    transition: opacity .25s ease;
+  }
+
+  .landing--torch.is-peeking h1 {
+    opacity: .3;
+  }
+
+  .landing--torch.is-peeking .lead {
+    opacity: .2;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .landing--torch h1,
+  .landing--torch .lead {
+    transition: none;
+  }
+}
+
+/* Su schermi stretti il titolo va a capo su più righe e il sottotitolo occupa
+   tutta la larghezza: la pozza centrale, tagliata al 78% del raggio, lasciava
+   i bordi del testo sopra al video non velato. Qui si allarga fino a coprire
+   l'intera larghezza, accorciandosi in altezza. */
+@media (max-width: 767.98px) {
+  .landing--dark .scrim {
+    background:
+      radial-gradient(ellipse 100% 42% at 50% 50%,
+        rgba(0, 0, 0, .88) 0%,
+        rgba(0, 0, 0, .80) 55%,
+        rgba(0, 0, 0, 0) 100%),
+      linear-gradient(rgba(0, 0, 0, .25), rgba(0, 0, 0, .25));
+  }
+}
+
+.landing--dark h1,
+.landing--dark .lead {
+  text-shadow: 0 2px 18px rgba(0, 0, 0, .95), 0 0 50px rgba(0, 0, 0, .8);
+}
+
+.landing--dark .lead {
+  opacity: .75;
+}
+
+/* ============================================================
+   Tema (chiaro/scuro) delle landing rinnovate.
+
+   Le regole qui sotto sono scritte UNA volta sola e leggono solo token:
+   con la tavolozza chiara di :root rendono esattamente come Bootstrap,
+   quindi non cambiano nulla finché non si commuta la tavolozza.
+
+   La tavolozza scura sta in fondo, in due blocchi gemelli:
+   - html.theme-auto  -> segue la preferenza di sistema
+   - html.theme-dark  -> la forza comunque
+   (html.theme-light non ha bisogno di regole: è la tavolozza di :root)
+   La classe sta su <html> perché uno script in <head> possa applicarla
+   prima del primo disegno; i token restano dichiarati sul <body>, dove
+   var(--accent) legge l'accento della pagina.
+   Se ne modifichi uno, allinea l'altro.
+   ============================================================ */
+
+.landing-page {
+  background-color: var(--page-bg);
+  color: var(--ink);
+}
+
+/* Bootstrap cabla fondo bianco e bordo nero trasparente sulle .card */
+.landing-page .card {
+  background-color: var(--panel);
+  border-color: var(--hairline);
+  color: var(--ink);
+}
+
+.landing-page .card:hover,
+.landing-page .card:focus {
+  box-shadow: var(--shadow-md);
+}
+
+.landing-page .avatar,
+.landing-page .testimonial {
+  box-shadow: var(--shadow-lg);
+}
+
+/* solo i link nel corpo del testo: non i bottoni, non la navbar */
+.landing-page section p a:not(.btn),
+.landing-page .footer a {
+  color: var(--link);
+}
+
+.landing-page section p a:not(.btn):hover,
+.landing-page .footer a:hover {
+  color: var(--link-hover);
+}
+
+.landing-page #mainNav.bg-dark,
+.landing-page footer.bg-dark {
+  background-color: var(--nav-bg) !important;
+}
+
+.landing-page #mainNav {
+  border-bottom: 1px solid var(--nav-border);
+}
+
+.landing-page footer.bg-dark {
+  border-top: 1px solid var(--nav-border);
+}
+
+/* --- sezioni con colori cablati, ora tokenizzate --- */
+
+/* #percorso era forzato bianco perché il diagramma LPI è disegnato per fondo
+   chiaro. Ora la sezione segue il tema e il bianco resta solo sotto
+   all'immagine, come un vassoio: si legge come una scelta, non come una toppa. */
+.landing-page #percorso {
+  background-color: var(--surface);
+  color: var(--ink);
+}
+
+.landing-page #percorso img {
+  background-color: #ffffff;
+  border-radius: 12px;
+  padding: 1rem;
+}
+
+.landing-page blockquote p {
+  background: var(--panel);
+  color: var(--ink);
+}
+
+/* Fascia gialla a tinta fissa (i contatori "Numeri che parlano" e il richiamo
+   della index): stesso giallo su tutte le pagine, in entrambi i temi. Il testo
+   resta scuro perché sul giallo il bianco arriva a malapena a 1.7:1. */
+.callout-flat {
+  background-color: #FEC224;
+
+  /* Il titolo aveva 6rem d'aria sopra e 2.5 sotto, con le icone che partono
+     subito: sembrava incollato ai numeri mentre in alto lo spazio avanzava.
+     La fascia cede un po' sopra e lo restituisce in mezzo. */
+  padding-top: 4.5rem;
+  padding-bottom: 5rem;
+}
+
+.callout-flat .section-title {
+  margin-bottom: 4rem;
+}
+
+/* In colonna i tre blocchi si toccano: l'etichetta di uno finisce attaccata
+   all'icona del successivo. */
+@media (max-width: 991.98px) {
+  .callout-flat .stats + .stats {
+    margin-top: 2.5rem;
+  }
+}
+
+.callout-flat,
+.callout-flat h2,
+.callout-flat h5,
+.callout-flat p,
+.callout-flat .counting,
+.callout-flat .stats .fa {
+  color: #212529;
+}
+
+/* Le didascalie sotto ai grafici a ciambella sono h5, quindi 1.25rem: erano
+   più grandi del testo corrente che le precede. Sono didascalie, stanno un
+   gradino sotto. */
+.doughnut h5 {
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+/* Il riquadro del coupon sta dentro al discorso della sezione: si ferma alla
+   colonna di lettura invece di attraversare tutto il contenitore. */
+#esame .callout-flat {
+  max-width: var(--measure);
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 10px;
+}
+
+/* --- tavolozza scura: segue la preferenza di sistema --- */
+@media (prefers-color-scheme: dark) {
+  html.theme-auto body {
+    --ink: #e7eaed;
+    --ink-muted: #98a2ab;
+    --surface: #161c22;
+    --panel: #222a32;
+    --hairline: #333c45;
+
+    --page-bg: #0e1216;
+    --nav-bg: #222a32;
+    --nav-border: #333c45;
+    --link: #74aaff;
+    --link-hover: #a3c8ff;
+    --shadow-md: 0 10px 22px rgba(0, 0, 0, .5);
+    --shadow-lg: 0 12px 26px rgba(0, 0, 0, .55);
+
+    --img-blend: normal;
+    --img-border: #333c45;
+    --carousel-invert: none;
+
+    --accent-soft: rgba(255, 255, 255, .08);                          /* ripiego */
+    --accent-soft: color-mix(in srgb, var(--accent) 26%, transparent);
+  }
+}
+
+/* --- tavolozza scura: forzata, a prescindere dal sistema --- */
+html.theme-dark body {
+  --ink: #e7eaed;
+  --ink-muted: #98a2ab;
+  --surface: #161c22;
+  --panel: #222a32;
+  --hairline: #333c45;
+
+  --page-bg: #0e1216;
+  --nav-bg: #222a32;
+  --nav-border: #333c45;
+  --link: #74aaff;
+  --link-hover: #a3c8ff;
+  --shadow-md: 0 10px 22px rgba(0, 0, 0, .5);
+  --shadow-lg: 0 12px 26px rgba(0, 0, 0, .55);
+
+  --img-blend: normal;
+  --img-border: #333c45;
+  --carousel-invert: none;
+
+  --accent-soft: rgba(255, 255, 255, .08);                          /* ripiego */
+  --accent-soft: color-mix(in srgb, var(--accent) 26%, transparent);
+}
+
+/* Schema di confronto fra i corsi: tre pannelli affiancati con lo stesso
+   scheletro — livello di partenza, nome, cosa impari, esame finale — così il
+   confronto si fa scorrendo le righe invece di leggere tre paragrafi. */
+.confronto > [class^="col-"] {
+  display: flex;
+}
+
+.confronto .info-panel {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.confronto-livello {
+  margin-bottom: .35rem;
+  color: var(--accent);
+  font-size: .78rem;
+  font-weight: 700;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+
+.confronto .info-panel h5 {
+  margin-bottom: 1.25rem;
+}
+
+/* la riga sull'esame chiude il pannello, staccata dall'elenco e appoggiata
+   in fondo: così le tre colonne si chiudono tutte allo stesso modo */
+.confronto-esame {
+  margin: 1.5rem 0 0;
+  padding-top: 1rem;
+  border-top: 1px solid var(--hairline);
+  color: var(--ink-muted);
+  font-size: .95rem;
+}
+
+.confronto .icon-list {
+  flex: 1 1 auto;
+}
+
+/* In #compara i titoli dei corsi stanno fra un paragrafo e l'altro: senza
+   questa regola resterebbero larghi quanto il contenitore mentre i paragrafi
+   si stringono sulla colonna di lettura, e le due colonne non si
+   allineerebbero. */
+/* Figure, video e diagrammi stanno sulla stessa colonna del testo che li
+   introduce, come già fa .section-figure. Prima ereditavano la larghezza del
+   contenitore e restavano larghi 1110 contro i 780 dei paragrafi. */
+.yt_video,
+#lf-statistics {
+  display: block;
+  max-width: var(--measure);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* La citazione e le testimonianze stanno dentro al discorso: vanno sulla
+   stessa colonna dei paragrafi che le introducono, altrimenti il testo si
+   stringe e loro no. */
+#testimonianze blockquote,
+#testimonianze .testimonial {
+  max-width: var(--measure);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* #compara elenca descrizioni brevi sotto a ciascun titolo di corso: erano
+   a 1.1em e giustificate, e risultavano pesanti. Ora i paragrafi portano
+   .section-note come il resto del testo corrente, quindi la misura la
+   prendono da lì e questa regola non serve più. */
+
+
+/* Selettore del tema: pastiglia discreta in basso a destra, fuori dal flusso.
+   Compare solo dopo che l'hero è uscito di scena: lì sopra non serve, e su
+   un hero scuro in tema chiaro sarebbe il punto in cui stona di più.
+   Senza JS resta semplicemente sempre visibile (la classe .auto-hide la
+   aggiunge lo script, non il markup). Usa i token, quindi segue il tema. */
+.theme-toggle {
+  position: fixed;
+  right: 1rem;
+  bottom: 1rem;
+  z-index: 1040;
+  /* 44px è anche la misura minima comoda per un bersaglio da toccare */
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 1px solid var(--hairline);
+  border-radius: 50%;
+  background-color: var(--panel);
+  color: var(--ink);
+  font-size: 1.15rem;
+  line-height: 1;
+  /* a riposo era al 50% di opacità con l'inchiostro smorzato: si confondeva
+     col fondo. Ora è piena e staccata dalla pagina da un'ombra, ma resta un
+     cerchietto in un angolo. */
+  opacity: .92;
+  box-shadow: var(--shadow-md);
+  cursor: pointer;
+  transition: opacity .25s ease-in-out, visibility .25s ease-in-out,
+              color .2s ease-in-out, box-shadow .2s ease-in-out,
+              transform .25s ease-in-out;
+}
+
+.theme-toggle.auto-hide {
+  opacity: 0;
+  visibility: hidden;      /* nascosta anche alla tastiera e ai lettori di schermo */
+  transform: translateY(10px);
+}
+
+.theme-toggle.auto-hide.is-visible {
+  opacity: .92;
+  visibility: visible;
+  transform: none;
+}
+
+.theme-toggle:hover,
+.theme-toggle:focus {
+  opacity: 1;
+  color: var(--accent);
+  border-color: var(--accent);
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-2px);
+  outline: none;
+}
+
+/* su desktop c'è spazio: la si stacca un po' di più dai bordi */
+@media (min-width: 992px) {
+  .theme-toggle {
+    right: 2rem;
+    bottom: 2rem;
+  }
+}
+
+/* ============================================================
+   Hero alternativo: ruota Kubernetes che gira lenta al posto del
+   teaser. Qui non c'è un video da domare, quindi niente velo sopra:
+   il contrasto col testo si regola all'origine, abbassando l'opacità
+   della ruota, esattamente come le altre landing fanno col teaser.
+   ============================================================ */
+/* Hero senza media: il fondo è una velatura dell'accento della pagina sul
+   nero. Serve alle landing per cui non esiste un teaser, e non richiede di
+   inventare un'immagine solo per riempire lo schermo. */
+.landing--tinta .bg {
+  background: radial-gradient(ellipse 90% 80% at 50% 45%,
+    color-mix(in srgb, var(--accent) 34%, #0b1120) 0%,
+    #0b1120 55%,
+    #070a12 100%);
+  background-color: #0b1120;                                        /* ripiego */
+  filter: none;
+}
+
+/* Logo sopra al titolo: dopo un secondo si gira su se stesso come una
+   moneta. È rotateY, non rotateZ: il logo si ribalta sull'asse verticale
+   invece di girare in tondo. Il simbolo di Arch è simmetrico, quindi a
+   180 gradi torna identico e l'animazione si può fermare lì.
+   La prospettiva sta sul contenitore: applicata all'immagine stessa
+   ripartirebbe da capo a ogni fotogramma e il ribaltamento sembrerebbe
+   piatto. */
+.hero-logo {
+  /* inline-block: il contenitore si stringe sul logo. Da blocco occupava
+     tutta la colonna (1110px contro i 190 dell'immagine) e il ribaltamento
+     partiva passando col mouse a mezzo schermo di distanza. */
+  display: inline-block;
+  perspective: 900px;
+  margin-bottom: 2rem;
+}
+
+.hero-logo img {
+  display: block;
+  width: min(190px, 34vw);
+  margin: 0 auto;
+  /* il logo reagisce al tocco: niente ritardo di 300ms né evidenziazione
+     azzurra al tap */
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Il ribaltamento è UNA sola animazione, applicata da js/common.js con una
+   classe: quello d'ingresso e quelli al passaggio del mouse sono lo stesso
+   giro. Tenerne due — una sul selettore base e una sulla classe — sembrava
+   più semplice, ma alla rimozione della classe il nome dell'animazione
+   tornava a cambiare e il browser rifaceva partire quella d'ingresso, con il
+   suo ritardo: si vedeva un secondo giro un secondo dopo il primo. */
+.hero-logo img.is-flipping {
+  animation: hero-flip 1.2s cubic-bezier(.5, .05, .3, 1) both;
+}
+
+/* Il giro completo lascia il logo esattamente com'era: a 180 gradi resterebbe
+   speculare, e il simbolo di Arch non è perfettamente simmetrico. */
+@keyframes hero-flip {
+  from { transform: rotateY(0deg); }
+  to   { transform: rotateY(360deg); }
+}
+
+.landing--tinta h1 {
+  text-shadow: 0 2px 24px rgba(7, 10, 18, .9);
+}
+
+.landing--tinta .lead {
+  opacity: .72;
+}
+
+/* Hero di Kubernetes: il logo che gira sul fondo blu è un velo sopra al
+   teaser, non uno sfondo. La torcia lo buca e sotto c'è il video: si parte
+   dalla versione calma e il video si scopre solo se lo si cerca. */
+.landing--logo video {
+  z-index: -99;
+  filter: none;
+}
+
+.landing--logo .veil {
+  position: absolute;
+  z-index: -98;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  /* Ruotando, il quadrato del logo ha un ingombro pari alla sua diagonale:
+     senza taglio sporge oltre il bordo e su mobile la pagina scorre in
+     orizzontale. Il velo copre già tutto l'header, quindi è il punto giusto
+     dove fermarlo. */
+  overflow: hidden;
+}
+
+/* Dentro al velo l'impilamento riparte da zero: qui gli z-index negativi
+   globali di .bg e .wheel finirebbero dietro al velo stesso. */
+.landing--logo .veil .bg,
+.landing--logo .veil .wheel {
+  z-index: auto;
+}
+
+.landing--logo .bg {
+  background: radial-gradient(ellipse 90% 80% at 50% 45%, #16233f 0%, #0b1120 55%, #070a12 100%);
+  filter: none;
+}
+
+.landing--logo .wheel {
+  position: absolute;
+  z-index: -98;
+  top: 50%;
+  left: 50%;
+  /* La ruota resta quadrata e legata al lato corto: su schermi larghi non
+     deborda, su quelli alti non diventa un francobollo. */
+  width: min(78vh, 78vw);
+  height: min(78vh, 78vw);
+  margin: -1px 0 0 -1px;                 /* compensa l'arrotondamento del translate */
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+
+.landing--logo .wheel img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  opacity: .24;
+  /* L'icona bianca prende il blu Kubernetes senza dover servire un secondo file. */
+  filter: drop-shadow(0 0 60px rgba(50, 108, 229, .55));
+  animation: kwheel-spin 90s linear infinite;
+  will-change: transform;
+}
+
+/* Una rotazione completa dura un minuto e mezzo: il movimento si nota solo
+   se ci si sofferma, che è esattamente quello che deve fare uno sfondo. */
+@keyframes kwheel-spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+.landing--logo h1 {
+  text-shadow: 0 2px 24px rgba(7, 10, 18, .9);
+}
+
+.landing--logo .lead {
+  opacity: .62;
+}
+
+@media (max-width: 767.98px) {
+  .landing--logo .wheel {
+    width: min(92vw, 60vh);
+    height: min(92vw, 60vh);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .landing--logo .wheel img {
+    animation: none;
+  }
+}
+
+/* Schede "Novità": copertina a sinistra e testo a destra. Il corpo deve
+   stare dentro l'altezza dell'immagine, altrimenti la scheda cresce e resta
+   una fascia vuota sotto la copertina. Meno padding, titolo più vicino al
+   testo e interlinea da scheda invece che da paragrafo lungo. */
+/* Scheda orizzontale: copertina a sinistra, testo a destra. È il formato del
+   catalogo, dove le schede sono molte e servono a smistare più che a
+   raccontare. Sotto ai 768px le colonne di Bootstrap si impilano e la scheda
+   torna verticale da sola. */
+/* L'elenco del catalogo è più largo della colonna di lettura, ma non a filo
+   del contenitore: così le schede sporgono dal testo di un margine
+   riconoscibile invece di sembrare due impaginazioni diverse. */
+.card-list {
+  max-width: var(--measure-wide);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.card-list .card-h {
+  margin-bottom: 1.5rem;
+}
+
+.card-h .card-body {
+  padding: 1.5rem 1.75rem;
+}
+
+/* Con il pulsante ancorato in basso (mt-auto) lo spazio recuperato si può
+   spendere qui: il titolo respira senza far crescere la scheda.
+   Il corpo scende invece a 1.35rem: qui la scheda è una voce d'elenco, e con
+   l'h3 di Bootstrap (1.75rem, in grassetto) risultava più grande e più pesante
+   del titolo della famiglia che la introduce. */
+/* Il titolo della scheda orizzontale: l'h3 di Bootstrap vale 1.75rem in
+   grassetto, troppo per una voce d'elenco ripetuta sette volte. */
+.card-h .card-title {
+  margin-bottom: 1.1rem;
+  font-size: 1.35rem;
+}
+
+.card-h .card-text {
+  margin-bottom: 1rem;
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+/* La pastiglia va sulla copertina, che qui sta a sinistra: a destra finirebbe
+   addosso al titolo. */
+.card-h .card-badge {
+  right: auto;
+  left: .75rem;
+}
+
+/* Il mt-auto del pulsante non spingerebbe niente: la colonna del testo è un
+   blocco, quindi .card-body si fermerebbe all'altezza del suo contenuto e lo
+   spazio libero resterebbe sotto, fuori dal flex. Resa flex la colonna, il
+   corpo si allunga fino in fondo e i pulsanti scendono con lui.
+   In mobile le colonne sono impilate e alte quanto il contenuto: lì non
+   cambia nulla. */
+.card-h .row.no-gutters > [class^="col-"] {
+  display: flex;
+}
+
+.card-h .row.no-gutters .card-body {
+  flex: 1 1 auto;
+}
+
+/* La copertina tiene il proprio rapporto invece di riempire la colonna. Con
+   height:100% l'altezza gliela dettava il testo accanto — che va a capo più
+   volte man mano che la finestra si stringe — e object-fit:cover mangiava i
+   lati: il 9% a 1280px, quasi la metà sotto i 900. Fissato il 16/9 delle
+   copertine, il taglio non c'è più a nessuna larghezza; lo spazio che avanza
+   quando il testo è più alto si divide sopra e sotto (align-self: center) e
+   resta fondo della scheda. */
+.card-h .card-img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  align-self: center;
+  object-fit: cover;
+  border-radius: 0;
+}
+
+/* Impila prima di quanto farebbe Bootstrap. La soglia è quella del contenitore
+   lg: sotto i 992px il .container scende da 960 a 720, quindi la copertina
+   passa di colpo da 309 a 229px di larghezza mentre il testo, ancora più
+   stretto, va a capo quattro o cinque volte. Lì la scheda diventa alta il
+   doppio della copertina e questa galleggia in mezzo al vuoto. Impilata, la
+   copertina va a piena larghezza e il vuoto non esiste. La regola sostituisce
+   le colonne di Bootstrap, che qui sono col-md-4 e col-md-8. */
+@media (max-width: 991.98px) {
+  .card-h .row.no-gutters > [class^="col-"] {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+}
+
+/* ============================================================
+   CorsoReti: hero a particelle.
+   Il cielo notturno con la rete di particelle è l'identità di questa
+   landing e resta al posto del teaser video. Sta nello stesso strato
+   di .bg / video delle altre landing (dietro al testo); la colonna di
+   Bootstrap è position:relative, quindi titolo e CTA restano sopra
+   e cliccabili, mentre il resto dell'hero reagisce al mouse.
+   ============================================================ */
+.landing--particles #particles-js {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #0b1120;                                        /* ripiego */
+  background-image: url('../assets/night-sky.jpg');
+  background-size: cover;
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+}
+
+.landing--particles h1,
+.landing--particles .lead {
+  text-shadow: 0 2px 24px rgba(7, 10, 18, .9);
+}
+
+.landing--particles .lead {
+  opacity: .72;
 }
